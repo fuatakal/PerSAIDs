@@ -160,26 +160,25 @@ def clear_input_fields(input_data):
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-#_, left_button, right_button, _ = st.columns([3, 1, 1, 3])
+_, buttons, _ = st.columns([3, 1, 4])
 predicted = False
 cleared = False
 
-#with left_button:
-if st.button("Predict"):
-    st.spinner()
-    input_df = user_input_features()
-    model = pickle.load(open('/app/masterstudies/Streamlit_app/model.pkl', 'rb'))
-    scaler = pickle.load(open('/app/masterstudies/Streamlit_app/scaler.pkl', 'rb'))
-    scaled_input_df = scaler.transform(input_df)
-    prediction = model.predict(scaled_input_df)
-    prediction_proba = model.predict_proba(scaled_input_df)
+with buttons:
+    if st.button("Predict"):
+        st.spinner()
+        input_df = user_input_features()
+        model = pickle.load(open('/app/masterstudies/Streamlit_app/model.pkl', 'rb'))
+        scaler = pickle.load(open('/app/masterstudies/Streamlit_app/scaler.pkl', 'rb'))
+        scaled_input_df = scaler.transform(input_df)
+        prediction = model.predict(scaled_input_df)
+        prediction_proba = model.predict_proba(scaled_input_df)
 
-    probas = [x * 100 for x in prediction_proba]
-    predicted = True
+        probas = [x * 100 for x in prediction_proba]
+        predicted = True
 
-#with right_button:
-if st.button("Clear"):
-    cleared = True
+    if st.button("Clear"):
+        cleared = True
 
 if predicted:
 
