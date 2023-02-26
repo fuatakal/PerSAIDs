@@ -166,8 +166,8 @@ with left_button:
     if st.button("Predict"):
         st.spinner()
         input_df = user_input_features()
-        model = pickle.load(open('/app/masterstudies/Streamlit_app/model.pkl', 'rb'))
-        scaler = pickle.load(open('/app/masterstudies/Streamlit_app/scaler.pkl', 'rb'))
+        model = pickle.load(open('model.pkl', 'rb'))
+        scaler = pickle.load(open('scaler.pkl', 'rb'))
         scaled_input_df = scaler.transform(input_df)
         prediction = model.predict(scaled_input_df)
         prediction_proba = model.predict_proba(scaled_input_df)
