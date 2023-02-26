@@ -30,7 +30,7 @@ with c2:
 
 
 # Create a three-column form layout
-c3, c4 = st.columns([1, 1])
+_, c3, c4, _ = st.columns([1, 1, 1, 1])
 
 with c3:
 
