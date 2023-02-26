@@ -11,7 +11,7 @@ st.markdown("<h2 style='text-align: center; color: black;'>Please fill the form 
 
 st.markdown("<br/><hr>", unsafe_allow_html=True)
 
-c1, c2 = st.columns([1, 1])
+_, c1, c2, _ = st.columns([1, 1, 1, 1])
 input_df = []
 with c1:
     Age_at_disease_Onset = st.number_input("Age at disease Onset", min_value=0.0, max_value=70.0, help="in years")
