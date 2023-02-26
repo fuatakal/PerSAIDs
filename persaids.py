@@ -158,7 +158,7 @@ def clear_input_fields(input_data):
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-left_button, right_button, _ = st.columns([1,1,6])
+_, left_button, right_button, _ = st.columns([4, 1, 1, 4])
 predicted = False
 cleared = False
 
