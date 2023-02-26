@@ -156,15 +156,13 @@ def clear_input_fields(input_data):
         input_data[field] = ''
 
 
-
-
 st.markdown("<hr>", unsafe_allow_html=True)
 
-_, buttons, _ = st.columns([3, 1, 4])
+left_button, right_button, _ = st.columns([1,1,6])
 predicted = False
 cleared = False
 
-with buttons:
+with left_button:
     if st.button("Predict"):
         st.spinner()
         input_df = user_input_features()
@@ -177,6 +175,7 @@ with buttons:
         probas = [x * 100 for x in prediction_proba]
         predicted = True
 
+with right_button:
     if st.button("Clear"):
         cleared = True
 
