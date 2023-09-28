@@ -6,96 +6,97 @@ import pandas as pd
 
 st.set_page_config(page_title="FMF Predictor", page_icon=":hospital:", layout="wide")
 
-st.markdown("<h1 style='text-align: center; color: black;'>Familial Mediterranean Fever (FMF) diagnosis using machine learning.</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: black;'>Please fill the form below and click the predict button to see how likely your patient has FMF.</h3>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>I am here to facilitate Familial Mediterranean Fever (FMF) diagnosis using machine learning.</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: black;'>Please fill the form below and click the predict button to see how likely your patient has FMF.</h2>", unsafe_allow_html=True)
 
-st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown("<br/><hr>", unsafe_allow_html=True)
 
 input_df = []
 
 
 # Create a three-column form layout
-_, c1, c2, c3, _ = st.columns([0.25, 1.5, 1.5, 1.5, 0.25])
-
-with c1:
-    Number_episodes = st.number_input("Number of Episodes", min_value=0, max_value=30, help="Write the number of episodes in a year.")
-    Chest_pain = st.radio("Chest Pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
-    MucoCu = st.radio("Mucocutaneous Manifestations? ", ('Yes', 'No'), horizontal =True)
-
-
-with c2:
-    Duration_episodes = st.number_input("Duration of Episodes", min_value=0.0, max_value=25.0, help="in days")
-    Abdominal_pain = st.radio("Abdominal Pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
-    Cardio = st.radio("Cardiologic Manifestations? ", ('Yes', 'No'), horizontal =True)
-    Gastr = st.radio("Gastrointestinal Manifestations? ", ('Yes', 'No'), horizontal =True)
+_, c3, c4, c5, _ = st.columns([1.25, 1, 1, 1, 1.25])
 
 with c3:
-    Ethnicity = st.selectbox("Ethnicity:", ('Arab', 'Jewish', 'Caucasian', 'Hispanic', 'Asian', 'Other'), key='ethnicity', help="Select what group decribes the best.")
-    Joint = st.radio("Joint Pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
-    Const = st.radio("Costitutional Manifestations? ", ('Yes', 'No'), horizontal =True)
+    Age_at_disease_Onset = st.number_input("Age at disease Onset", min_value=0.0, max_value=18.0, help="in years")
+    Number_episodes = st.number_input("Number of episodes/year", min_value=0, max_value=30, help="in years")
+
+with c4:
+    Age_at_diagnosis = st.number_input("Age at diagnosis", min_value=0.0, max_value=18.0, help="in years")
+    Ethincity = st.radio("Ethnic group:", ('Arab', 'Jewish', 'Caucasian', 'Other'), horizontal =True)
+
+with c5:
+    Age_at_last_visit = st.number_input("Age at last visit", min_value=0.0, max_value=18.0, help="in years")
+    Duration_episodes = st.number_input("Duration of episodes (days)", min_value=0.0, max_value=18.0, help="in years")
 
 
+
+# Create a three-column form layout
+_, c6, c7, c8, _ = st.columns([1.25, 1, 1, 1, 1.25])
+
+with c6:
+    Headache = st.radio("Headache", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    MucoCu = st.radio("Mucocutaneous manifestations? ", ('Yes', 'No'), horizontal =True)
+    Cardio = st.radio("Cardiologic manifestations? ", ('Yes', 'No'), horizontal =True)
+    Gastr = st.radio("Gastrointestinal manifestations? ", ('Yes', 'No'), horizontal =True)
+    Ocul = st.radio("Ocular manifestations? ", ('Yes', 'No'), horizontal =True)
+
+
+with c7:
+    Gender = st.radio("Gender", ('Male', 'Female'), horizontal =True)
+    Arthralgia = st.radio("Joint pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    Abdominal_pain = st.radio("Abdominal pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    Drug = st.radio("Using therapy? ", ('Yes', 'No'), horizontal =True)
+    Infect = st.radio("Infection is identified as trigger? ", ('Yes', 'No'), horizontal =True)
+
+with c8:
+    Chest_pain = st.radio("Chest pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    Genito = st.radio("Genitourinary manifestations? ", ('Yes', 'No'), horizontal =True)
+    Const = st.radio("Costitutional manifestations? ", ('Yes', 'No'), horizontal =True)
+    Neuro = st.radio("Neurologic manifestations? ", ('Yes', 'No'), horizontal =True)
+    Musc = st.radio("Muscoloskeletal manifestations? ", ('Yes', 'No'), horizontal =True)
 
 def user_input_features():
+    Gender_var = (1 if Gender == 'Female' else 0)
     MucoCu_var = (1 if MucoCu == 'Yes' else 0)
     Cardio_var = (1 if Cardio == 'Yes' else 0)
     Gastr_var = (1 if Gastr == 'Yes' else 0)
+    Neuro_var = (1 if Neuro == 'Yes' else 0)
+    Musc_var = (1 if Musc == 'Yes' else 0)
+    Ocul_var = (1 if Ocul == 'Yes' else 0)
     Const_var = (1 if Const == 'Yes' else 0)
+    Drug_var = (1 if Drug == 'Yes' else 0)
+    Genito_var = (1 if Genito == 'Yes' else 0)
+    Infect_var = (1 if Infect == 'Yes' else 0)
 
     # Ethincity
-    if Ethnicity == 'Arab':
+    if Ethincity == 'Arab':
         Arab = 1
         Jewish = 0
         Caucasian = 0
-        Hispanic = 0
-        Asian = 0
-        Other = 0
-    elif Ethnicity == 'Jewish':
+    elif Ethincity == 'Jewish':
         Arab = 0
         Jewish = 1
         Caucasian = 0
-        Hispanic = 0
-        Asian = 0
-        Other = 0
-    elif Ethnicity == 'Caucasian':
+    elif Ethincity == 'Caucasian':
         Arab = 0
         Jewish = 0
         Caucasian = 1
-        Hispanic = 0
-        Asian = 0
-        Other = 0
-    elif Ethnicity == 'Hispanic':
-        Arab = 0
-        Jewish = 0
-        Caucasian = 0
-        Hispanic = 1
-        Asian = 0
-        Other = 0
-    elif Ethnicity == 'Asian':
-        Arab = 0
-        Jewish = 0
-        Caucasian = 0
-        Hispanic = 0
-        Asian = 1
-        Other = 0
     else:
         Arab = 0
         Jewish = 0
         Caucasian = 0
-        Hispanic = 0
-        Asian = 0
-        Other = 1
 
     # Headache
-    if Joint == 'Sometimes or often':
-        Joint_1 = 1
-        Joint_2 = 0
-    elif Joint == 'Always':
-        Joint_1 = 0
-        Joint_2 = 1
+    if Headache == 'Sometimes or often':
+        Head_1 = 1
+        Head_2 = 0
+    elif Headache == 'Always':
+        Head_1 = 0
+        Head_2 = 1
     else:
-        Joint_1 = 0
-        Joint_2 = 0
+        Head_1 = 0
+        Head_2 = 0
 
     # Abdominal pain
     if Abdominal_pain == 'Sometimes or often':
@@ -119,42 +120,46 @@ def user_input_features():
         Chest_1 = 0
         Chest_2 = 0
 
+    # Arthralgia
+    if Arthralgia == 'Sometimes or often':
+        Arth_1 = 1
+        Arth_2 = 0
+    elif Arthralgia == 'Always':
+        Arth_1 = 0
+        Arth_2 = 1
+    else:
+        Arth_1 = 0
+        Arth_2 = 0
 
-    if (Number_episodes == 0 and Duration_episodes < 0.5 and
-        MucoCu_var == 0 and Cardio_var == 0 and Gastr_var == 0 and Const_var == 0 and
-        Joint_1 == 0 and Joint_2 == 0 and Abd_1 == 0 and Abd_2 == 0 and
-        Chest_1 == 0 and Chest_2 == 0):
-        st.warning("You cannot make a prediction based on ethnicity alone.")
-        return None
     data = {
+            'Gender': Gender_var,
+            'Age at disease Onset': Age_at_disease_Onset,
+            'Age at last visit': Age_at_last_visit,
+            'Age at diagnosis': Age_at_diagnosis,
             'Number of episodes/year': Number_episodes,
             'duration of episodes (days)': Duration_episodes,
+            'Infect': Infect_var,
             'A_MucoCu': MucoCu_var,
+            'B_Musc': Musc_var,
+            'C_Ocul': Ocul_var,
             'D_Gastr': Gastr_var,
             'F_Cardio': Cardio_var,
+            'G_Neuro': Neuro_var,
+            'H_Genito': Genito_var,
             'I_Const': Const_var,
-            'Ethnicity_Caucasian': Caucasian,
+            'R_Drug': Drug_var,
             'Ethnicity_Arab': Arab,
-            'Ethnicity_Hispanic': Hispanic,
+            'Ethnicity_Caucasian': Caucasian,
             'Ethnicity_Jewish': Jewish,
-            'Ethnicity_Other': Other,
-            'Ethnicity_Asian': Asian,
+            'Arthralgia_1.0': Arth_1,
+            'Arthralgia_2.0': Arth_2,
             'Abdominal pain_1.0': Abd_1,
             'Abdominal pain_2.0': Abd_2,
             'Chest pain_1.0': Chest_1,
             'Chest pain_2.0': Chest_2,
-            'Arthralgia_1.0': Joint_1,
-            'Arthralgia_2.0': Joint_2
-            }
+            'Headache (anytime)_1.0': Head_1,
+            'Headache (anytime)_2.0': Head_2}
     features = pd.DataFrame(data, index=[0])
-
-    # Set Number_episodes to 1 if it was originally 0
-    if Number_episodes == 0:
-        features['Number of episodes/year'] = 1
-
-    # Set Duration_episodes to 0.5 if it was less than 0.5
-    if Duration_episodes < 0.5:
-        features['duration of episodes (days)'] = 0.5
 
     return features
 
@@ -165,7 +170,7 @@ def user_input_features():
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-_, left_button, right_button, _ = st.columns([3,1,1,3])
+_, left_button, right_button, _ = st.columns([6,1,1,6])
 predicted = False
 cleared = False
 
@@ -173,12 +178,18 @@ with left_button:
     if st.button("Predict"):
         st.spinner()
 
-        # Check if any data is entered
-        input_df = user_input_features()
-        if input_df is None:
-            st.warning("No prediction available.")
-
+        # Check if at least one feature (other than ethnicity) has been provided
+        if (Age_at_disease_Onset == 0 and Number_episodes == 0 and
+            Age_at_diagnosis == 0 and Age_at_last_visit == 0 and
+            Duration_episodes == 0 and Headache == 'Never' and
+            MucoCu == 'No' and Cardio == 'No' and Gastr == 'No' and
+            Ocul == 'No' and Gender == 'Male' and Arthralgia == 'Never' and
+            Abdominal_pain == 'Never' and Drug == 'No' and Infect == 'No' and
+            Chest_pain == 'Never' and Genito == 'No' and Const == 'No' and
+            Neuro == 'No' and Musc == 'No'):
+            st.warning("You cannot make a prediction based on ethnicity alone.")
         else:
+            input_df = user_input_features()
             model = pickle.load(open('model.pkl', 'rb'))
             scaler = pickle.load(open('scaler.pkl', 'rb'))
             scaled_input_df = scaler.transform(input_df)
@@ -187,7 +198,6 @@ with left_button:
 
             probas = [x * 100 for x in prediction_proba]
             predicted = True
-
 
 
 with right_button:
