@@ -6,7 +6,7 @@ import pandas as pd
 
 st.set_page_config(page_title="FMF Predictor", page_icon=":hospital:", layout="wide")
 
-st.markdown("<h1 style='text-align: center; color: black;'>Familial Mediterranean Fever (FMF) Assistant</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>Familial Mediterranean Fever (FMF) diagnosis using machine learning.</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: black;'>Please fill the form below and click the predict button to see how likely your patient has FMF.</h3>", unsafe_allow_html=True)
 
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -120,6 +120,12 @@ def user_input_features():
         Chest_2 = 0
 
 
+    if (Number_episodes == 0 and Duration_episodes < 0.5 and
+        MucoCu_var == 0 and Cardio_var == 0 and Gastr_var == 0 and Const_var == 0 and
+        Joint_1 == 0 and Joint_2 == 0 and Abd_1 == 0 and Abd_2 == 0 and
+        Chest_1 == 0 and Chest_2 == 0):
+        st.warning("You cannot make a prediction based on ethnicity alone.")
+        return None
     data = {
             'Number of episodes/year': Number_episodes,
             'duration of episodes (days)': Duration_episodes,
@@ -141,6 +147,15 @@ def user_input_features():
             'Arthralgia_2.0': Joint_2
             }
     features = pd.DataFrame(data, index=[0])
+
+    # Set Number_episodes to 1 if it was originally 0
+    if Number_episodes == 0:
+        features['Number of episodes/year'] = 1
+
+    # Set Duration_episodes to 0.5 if it was less than 0.5
+    if Duration_episodes < 0.5:
+        features['duration of episodes (days)'] = 0.5
+
     return features
 
 
@@ -157,15 +172,22 @@ cleared = False
 with left_button:
     if st.button("Predict"):
         st.spinner()
-        input_df = user_input_features()
-        model = pickle.load(open('model.pkl', 'rb'))
-        scaler = pickle.load(open('scaler.pkl', 'rb'))
-        scaled_input_df = scaler.transform(input_df)
-        prediction = model.predict(scaled_input_df)
-        prediction_proba = model.predict_proba(scaled_input_df)
 
-        probas = [x * 100 for x in prediction_proba]
-        predicted = True
+        # Check if any data is entered
+        input_df = user_input_features()
+        if input_df is None:
+            st.warning("No prediction available.")
+
+        else:
+            model = pickle.load(open('model.pkl', 'rb'))
+            scaler = pickle.load(open('scaler.pkl', 'rb'))
+            scaled_input_df = scaler.transform(input_df)
+            prediction = model.predict(scaled_input_df)
+            prediction_proba = model.predict_proba(scaled_input_df)
+
+            probas = [x * 100 for x in prediction_proba]
+            predicted = True
+
 
 
 with right_button:
