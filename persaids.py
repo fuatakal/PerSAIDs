@@ -18,7 +18,7 @@ input_df = []
 _, c3, c4, c5, _ = st.columns([1.25, 1, 1, 1, 1.25])
 
 with c3:
-    Age_at_disease_Onset = st.number_input("Age at disease Onset", min_value=0.0, max_value=18.0, help="in years")
+    Age_at_disease_Onset = st.number_input("<b>Age at disease Onset</b>", min_value=0.0, max_value=18.0, help="in years")
     Number_episodes = st.number_input("Number of episodes/year", min_value=0, max_value=30, help="in years")
 
 with c4:
