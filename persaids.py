@@ -35,7 +35,7 @@ with c5:
 _, c6, c7, c8, _ = st.columns([1.25, 1, 1, 1, 1.25])
 
 with c6:
-    MucoCu = st.radio("Mucocutaneous manifestations? ", ('Yes', 'No'), horizontal =True)
+    Drug = st.radio("Using therapy? ", ('Yes', 'No'), horizontal =True)
     Cardio = st.radio("Cardiologic manifestations? ", ('Yes', 'No'), horizontal =True)
     Gastr = st.radio("Gastrointestinal manifestations? ", ('Yes', 'No'), horizontal =True)
     Headache = st.radio("Headache", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
@@ -43,7 +43,7 @@ with c6:
 
 with c7:
     Gender = st.radio("Gender", ('Male', 'Female'), horizontal =True)
-    Drug = st.radio("Using therapy? ", ('Yes', 'No'), horizontal =True)
+    MucoCu = st.radio("Mucocutaneous manifestations? ", ('Yes', 'No'), horizontal =True)
     Infect = st.radio("Infection is identified as trigger? ", ('Yes', 'No'), horizontal =True)
     Arthralgia = st.radio("Joint pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
     Ocul = st.radio("Ocular manifestations? ", ('Yes', 'No'), horizontal =True)
