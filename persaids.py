@@ -23,11 +23,11 @@ with c3:
 
 with c4:
     Age_at_diagnosis = st.number_input("Age at diagnosis", min_value=0.0, max_value=18.0, help="in years")
-    Ethincity = st.radio("Ethnic group:", ('Arab', 'Jewish', 'Caucasian', 'Other'), horizontal =True)
+    Duration_episodes = st.number_input("Duration of episodes (days)", min_value=0.0, max_value=18.0, help="in years")
 
 with c5:
     Age_at_last_visit = st.number_input("Age at last visit", min_value=0.0, max_value=18.0, help="in years")
-    Duration_episodes = st.number_input("Duration of episodes (days)", min_value=0.0, max_value=18.0, help="in years")
+    Ethincity = st.radio("Ethnic group:", ('Arab', 'Jewish', 'Caucasian', 'Other'), horizontal =True)
 
 
 
@@ -35,26 +35,26 @@ with c5:
 _, c6, c7, c8, _ = st.columns([1.25, 1, 1, 1, 1.25])
 
 with c6:
-    Headache = st.radio("Headache", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
     MucoCu = st.radio("Mucocutaneous manifestations? ", ('Yes', 'No'), horizontal =True)
     Cardio = st.radio("Cardiologic manifestations? ", ('Yes', 'No'), horizontal =True)
     Gastr = st.radio("Gastrointestinal manifestations? ", ('Yes', 'No'), horizontal =True)
     Ocul = st.radio("Ocular manifestations? ", ('Yes', 'No'), horizontal =True)
+    Headache = st.radio("Headache", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
 
 
 with c7:
     Gender = st.radio("Gender", ('Male', 'Female'), horizontal =True)
-    Arthralgia = st.radio("Joint pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
-    Abdominal_pain = st.radio("Abdominal pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
     Drug = st.radio("Using therapy? ", ('Yes', 'No'), horizontal =True)
     Infect = st.radio("Infection is identified as trigger? ", ('Yes', 'No'), horizontal =True)
+    Arthralgia = st.radio("Joint pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    Abdominal_pain = st.radio("Abdominal pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
 
 with c8:
-    Chest_pain = st.radio("Chest pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
     Genito = st.radio("Genitourinary manifestations? ", ('Yes', 'No'), horizontal =True)
     Const = st.radio("Costitutional manifestations? ", ('Yes', 'No'), horizontal =True)
     Neuro = st.radio("Neurologic manifestations? ", ('Yes', 'No'), horizontal =True)
     Musc = st.radio("Muscoloskeletal manifestations? ", ('Yes', 'No'), horizontal =True)
+    Chest_pain = st.radio("Chest pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
 
 def user_input_features():
     Gender_var = (1 if Gender == 'Female' else 0)
