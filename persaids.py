@@ -44,12 +44,12 @@ with c6:
 with c7:
     Gender = st.radio("Gender", ('Male', 'Female'), horizontal =True)
     MucoCu = st.radio("Mucocutaneous manifestations? ", ('Yes', 'No'), horizontal =True)
-    Infect = st.radio("Infection is identified as trigger? ", ('Yes', 'No'), horizontal =True)
+    Genito = st.radio("Genitourinary manifestations? ", ('Yes', 'No'), horizontal =True)
     Arthralgia = st.radio("Joint pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
     Ocul = st.radio("Ocular manifestations? ", ('Yes', 'No'), horizontal =True)
 
 with c8:
-    Genito = st.radio("Genitourinary manifestations? ", ('Yes', 'No'), horizontal =True)
+    Infect = st.radio("Infection is identified as trigger? ", ('Yes', 'No'), horizontal =True)
     Const = st.radio("Costitutional manifestations? ", ('Yes', 'No'), horizontal =True)
     Neuro = st.radio("Neurologic manifestations? ", ('Yes', 'No'), horizontal =True)
     Chest_pain = st.radio("Chest pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
