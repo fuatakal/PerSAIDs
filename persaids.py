@@ -38,23 +38,22 @@ with c6:
     MucoCu = st.radio("Mucocutaneous manifestations? ", ('Yes', 'No'), horizontal =True)
     Cardio = st.radio("Cardiologic manifestations? ", ('Yes', 'No'), horizontal =True)
     Gastr = st.radio("Gastrointestinal manifestations? ", ('Yes', 'No'), horizontal =True)
-    Ocul = st.radio("Ocular manifestations? ", ('Yes', 'No'), horizontal =True)
     Headache = st.radio("Headache", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
-
+    Abdominal_pain = st.radio("Abdominal pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
 
 with c7:
     Gender = st.radio("Gender", ('Male', 'Female'), horizontal =True)
     Drug = st.radio("Using therapy? ", ('Yes', 'No'), horizontal =True)
     Infect = st.radio("Infection is identified as trigger? ", ('Yes', 'No'), horizontal =True)
     Arthralgia = st.radio("Joint pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
-    Abdominal_pain = st.radio("Abdominal pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    Ocul = st.radio("Ocular manifestations? ", ('Yes', 'No'), horizontal =True)
 
 with c8:
     Genito = st.radio("Genitourinary manifestations? ", ('Yes', 'No'), horizontal =True)
     Const = st.radio("Costitutional manifestations? ", ('Yes', 'No'), horizontal =True)
     Neuro = st.radio("Neurologic manifestations? ", ('Yes', 'No'), horizontal =True)
-    Musc = st.radio("Muscoloskeletal manifestations? ", ('Yes', 'No'), horizontal =True)
     Chest_pain = st.radio("Chest pain", ('Never', 'Sometimes or often', 'Always'), horizontal =True, help="Select what describes the sympotom best.")
+    Musc = st.radio("Muscoloskeletal manifestations? ", ('Yes', 'No'), horizontal =True)
 
 def user_input_features():
     Gender_var = (1 if Gender == 'Female' else 0)
