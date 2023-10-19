@@ -68,7 +68,7 @@ def user_input_features():
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-_, left_button, right_button, _ = st.columns([5, 1, 0.5,  5])
+_, left_button, right_button, _ = st.columns([5, 1, 1,  5])
 predicted = False
 cleared = False
 
