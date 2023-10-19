@@ -6,7 +6,7 @@ import pandas as pd
 
 st.set_page_config(page_title="FMF Predictor", page_icon=":hospital:", layout="wide")
 
-st.markdown("<h1 style='text-align: center; color: black;'>Familial Mediterranean Fever (FMF) diagnosis using machine learning.</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>Familial Mediterranean Fever (FMF) Predictor.</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: black;'>Please fill the form below and click the predict button to see how likely your patient has FMF.</h3>", unsafe_allow_html=True)
 
 st.markdown("<hr>", unsafe_allow_html=True)
